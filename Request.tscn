@@ -1,0 +1,451 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Request.gd" type="Script" id=1]
+[ext_resource path="res://assets/container.png" type="Texture" id=2]
+[ext_resource path="res://assets/shop_button_normal.png" type="Texture" id=3]
+[ext_resource path="res://Slot.gd" type="Script" id=4]
+[ext_resource path="res://assets/shop_button_pressed.png" type="Texture" id=5]
+[ext_resource path="res://assets/shop_button_hover.png" type="Texture" id=6]
+[ext_resource path="res://assets/item_container.png" type="Texture" id=7]
+[ext_resource path="res://font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://assets/items/bat_hat(40x40).png" type="Texture" id=9]
+[ext_resource path="res://assets/item_container_hover.png" type="Texture" id=10]
+[ext_resource path="res://assets/description_container.png" type="Texture" id=11]
+[ext_resource path="res://assets/Kenney Pixel.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://Description.gd" type="Script" id=13]
+
+[sub_resource type="DynamicFont" id=3]
+size = 14
+font_data = ExtResource( 12 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "hide_shop"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Container/SlotsContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Container/SlotsContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show_shop"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Container/SlotsContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Container/SlotsContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="ShopContainer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 214.907 ]
+}
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 9.0
+margin_top = -85.0
+margin_right = 161.0
+margin_bottom = 85.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="Container"]
+margin_right = 152.0
+margin_bottom = 14.0
+custom_constants/separation = 0
+
+[node name="Margin" type="Control" parent="Container/HBox"]
+margin_right = 53.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 53, 0 )
+
+[node name="Shop" type="TextureButton" parent="Container/HBox" groups=[
+"button",
+]]
+margin_left = 53.0
+margin_right = 99.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 23, 0 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
+
+[node name="SlotsContainer" type="GridContainer" parent="Container"]
+margin_top = 18.0
+margin_right = 152.0
+margin_bottom = 170.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot1" type="TextureRect" parent="Container/SlotsContainer"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="TextureRect" parent="Container/SlotsContainer"]
+margin_left = 52.0
+margin_right = 100.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="TextureRect" parent="Container/SlotsContainer"]
+margin_left = 104.0
+margin_right = 152.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="TextureRect" parent="Container/SlotsContainer"]
+margin_top = 52.0
+margin_right = 48.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="TextureRect" parent="Container/SlotsContainer"]
+margin_left = 52.0
+margin_top = 52.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="TextureRect" parent="Container/SlotsContainer"]
+margin_left = 104.0
+margin_top = 52.0
+margin_right = 152.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot6"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="TextureRect" parent="Container/SlotsContainer"]
+margin_top = 104.0
+margin_right = 48.0
+margin_bottom = 152.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot7"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="TextureRect" parent="Container/SlotsContainer"]
+margin_left = 52.0
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 152.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot8"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="TextureRect" parent="Container/SlotsContainer"]
+margin_left = 104.0
+margin_top = 104.0
+margin_right = 152.0
+margin_bottom = 152.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ItemIcon" type="TextureRect" parent="Container/SlotsContainer/Slot9"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemContainer" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -76.0
+margin_right = -9.0
+margin_bottom = 94.0
+texture = ExtResource( 7 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="ItemContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopMargin" type="Control" parent="ItemContainer/VBox"]
+margin_right = 152.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="HBox" type="HBoxContainer" parent="ItemContainer/VBox"]
+margin_top = 10.0
+margin_right = 152.0
+margin_bottom = 58.0
+
+[node name="Margin" type="Control" parent="ItemContainer/VBox/HBox"]
+margin_right = 8.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 8, 0 )
+
+[node name="Container" type="TextureRect" parent="ItemContainer/VBox/HBox"]
+margin_left = 12.0
+margin_right = 60.0
+margin_bottom = 48.0
+texture = ExtResource( 10 )
+
+[node name="ItemIcon" type="TextureRect" parent="ItemContainer/VBox/HBox/Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="ItemContainer/VBox/HBox"]
+margin_left = 64.0
+margin_right = 144.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 80, 0 )
+custom_constants/separation = 4
+
+[node name="Margin" type="Control" parent="ItemContainer/VBox/HBox/VBox"]
+margin_right = 80.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="ItemName" type="Label" parent="ItemContainer/VBox/HBox/VBox"]
+margin_top = 9.0
+margin_right = 80.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 8 )
+text = "Bat Hat"
+align = 1
+valign = 1
+
+[node name="ItemPrice" type="Label" parent="ItemContainer/VBox/HBox/VBox"]
+margin_top = 25.0
+margin_right = 80.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 8 )
+text = "1500"
+align = 1
+valign = 1
+
+[node name="MiddleMargin" type="Control" parent="ItemContainer/VBox"]
+margin_top = 60.0
+margin_right = 152.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="DescriptionContainer2" type="HBoxContainer" parent="ItemContainer/VBox"]
+margin_top = 70.0
+margin_right = 152.0
+margin_bottom = 140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftMargin" type="Control" parent="ItemContainer/VBox/DescriptionContainer2"]
+margin_right = 1.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 1, 0 )
+
+[node name="DescriptionTexture" type="TextureRect" parent="ItemContainer/VBox/DescriptionContainer2"]
+margin_left = 5.0
+margin_right = 147.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 142, 70 )
+texture = ExtResource( 11 )
+
+[node name="LineEdit" type="RichTextLabel" parent="ItemContainer/VBox/DescriptionContainer2/DescriptionTexture"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -24.0
+margin_right = 58.0
+margin_bottom = 24.0
+custom_fonts/normal_font = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/hide_shop = SubResource( 1 )
+anims/show_shop = SubResource( 2 )
+
+[connection signal="update_text" from="." to="ItemContainer" method="update_text"]
