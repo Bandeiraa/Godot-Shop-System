@@ -14,12 +14,11 @@
 [ext_resource path="res://assets/Kenney Pixel.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://Description.gd" type="Script" id=13]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 14
 font_data = ExtResource( 12 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "hide_shop"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Container/SlotsContainer:modulate")
 tracks/0/interp = 1
@@ -45,8 +44,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "show_shop"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Container/SlotsContainer:modulate")
 tracks/0/interp = 1
@@ -96,17 +94,16 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="Container"]
 margin_right = 152.0
-margin_bottom = 14.0
 custom_constants/separation = 0
 
 [node name="Margin" type="Control" parent="Container/HBox"]
 margin_right = 53.0
-margin_bottom = 14.0
 rect_min_size = Vector2( 53, 0 )
 
 [node name="Shop" type="TextureButton" parent="Container/HBox" groups=[
 "button",
 ]]
+visible = false
 margin_left = 53.0
 margin_right = 99.0
 margin_bottom = 14.0
@@ -116,9 +113,9 @@ texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
 
 [node name="SlotsContainer" type="GridContainer" parent="Container"]
-margin_top = 18.0
+margin_top = 4.0
 margin_right = 152.0
-margin_bottom = 170.0
+margin_bottom = 156.0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -439,13 +436,13 @@ margin_left = -58.0
 margin_top = -24.0
 margin_right = 58.0
 margin_bottom = 24.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Animation" type="AnimationPlayer" parent="."]
-anims/hide_shop = SubResource( 1 )
-anims/show_shop = SubResource( 2 )
+anims/hide_shop = SubResource( 2 )
+anims/show_shop = SubResource( 3 )
 
 [connection signal="update_text" from="." to="ItemContainer" method="update_text"]
