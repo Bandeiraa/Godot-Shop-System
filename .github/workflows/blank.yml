@@ -29,9 +29,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          mkdir -v $EXPORT_NAME
-          cd $EXPORT_NAME
-          godot -v --export "HTML5" ./build/web/${EXPORT_NAME}/index.html
+          godot -v --export "HTML5" ./build/web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -42,12 +40,6 @@ jobs:
     name: Upload to Itch
     needs: export-web
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        channel:
-          - windows
-          - webgl
     steps:
       - uses: actions/download-artifact@v2.0.8
         with:
@@ -56,7 +48,7 @@ jobs:
       - uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./build/web
+          gameData: build/web
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
-          buildChannel: HTML5 / Playable in browser
+          buildChannel: HTML5
