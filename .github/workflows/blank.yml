@@ -51,4 +51,4 @@ jobs:
           gameData: build/web
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
-          buildChannel: HTML5 / Playable in browser
+          buildChannel: HTML5
