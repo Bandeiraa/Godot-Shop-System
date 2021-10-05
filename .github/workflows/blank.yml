@@ -1,43 +1,60 @@
-name: CI
+name: "Build and Deploy to Itch io"
 
-on:
-  workflow_dispatch:
+'on':
+  push:
+    branches:
+      - main
 
+env:
+  GODOT_VERSION: 3.3.2
+  EXPORT_NAME: test-project
+  ITCH_USERNAME: DaviBandeiraa
+  ITCH_GAME_ID: scribble-cat-game
+  
 jobs:
-  build:
+  export-web:
+    name: Web Export
     runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.3.2
     steps:
-      - name: Run a one-line script
-        run: echo Hello, world!
-        
-  deploy-dev:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          cd $EXPORT_NAME
+          godot -v --export "HTML5" ../build/web/index.html
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: web
+          path: build/web
+          
+  deploy:
+    name: Upload to Itch
     runs-on: ubuntu-latest
-    environment:
-      name: dev
-      url: 'shoppinggodot.com'
-    needs: build
+    strategy:
+      fail-fast: true
+      matrix:
+        channel:
+          - windows
+          - webgl
     steps:
-      - name: Run a one-line script
-        run: echo Deploy Dev
-        
-        
-  deploy-hmg:
-    runs-on: ubuntu-latest
-    environment:
-      name: hmg
-      url: 'shoppinggodot.com'
-    needs: deploy-dev
-    steps:
-      - name: Run a one-line script
-        run: echo Deploy HMG
-        
-        
-  deploy-prd:
-    runs-on: ubuntu-latest
-    environment:
-      name: prd
-      url: 'shoppinggodot.com'
-    needs: deploy-hmg
-    steps:
-      - name: Run a one-line script
-        run: echo Deploy PRD
+      - uses: actions/download-artifact@v2.0.8
+        with:
+          name: web
+          path: build/web
+      - uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
+          gameData: ./build/web
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: HTML5 / Playable in browser
