@@ -40,12 +40,6 @@ jobs:
     name: Upload to Itch
     needs: export-web
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        channel:
-          - windows
-          - webgl
     steps:
       - uses: actions/download-artifact@v2.0.8
         with:
@@ -54,7 +48,7 @@ jobs:
       - uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./build/web
+          gameData: build/web
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: HTML5 / Playable in browser
