@@ -9,7 +9,7 @@ env:
   GODOT_VERSION: 3.3.2
   EXPORT_NAME: test-project
   ITCH_USERNAME: DaviBandeiraa
-  ITCH_GAME_ID: 925638
+  ITCH_GAME_ID: scribble-cat-game
   
 jobs:
   export-web:
