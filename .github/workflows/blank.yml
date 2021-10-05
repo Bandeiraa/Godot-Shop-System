@@ -31,7 +31,7 @@ jobs:
           mkdir -v -p build/web
           mkdir -v $EXPORT_NAME
           cd $EXPORT_NAME
-          godot -v --export "HTML5" ../build/web/index.html
+          godot -v --export "HTML5" ./build/web/${EXPORT_NAME}/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
