@@ -94,16 +94,17 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="Container"]
 margin_right = 152.0
+margin_bottom = 14.0
 custom_constants/separation = 0
 
 [node name="Margin" type="Control" parent="Container/HBox"]
 margin_right = 53.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 53, 0 )
 
 [node name="Shop" type="TextureButton" parent="Container/HBox" groups=[
 "button",
 ]]
-visible = false
 margin_left = 53.0
 margin_right = 99.0
 margin_bottom = 14.0
@@ -113,9 +114,9 @@ texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
 
 [node name="SlotsContainer" type="GridContainer" parent="Container"]
-margin_top = 4.0
+margin_top = 18.0
 margin_right = 152.0
-margin_bottom = 156.0
+margin_bottom = 170.0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
